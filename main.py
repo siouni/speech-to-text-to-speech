@@ -19,6 +19,14 @@ from style_bert_vits2.tts_model import TTSModel
 
 import aivmlib_py310.aivmlib as aivmlib
 
+# AIVMXファイルパス
+AIVMX_PATH = "models/Anneli.aivmx" # <- ダウンロードしたAIVMXファイルのパス
+
+#デバイスID
+MIC_DEVICE = 11 # <- ここにマイクのデバイスID
+MONITOR_DEVICE = 13 # <-ここにモニター出力のデバイスID
+SPEEKER_DEVICE = 14 # <-ここにスピーカー出力のデバイスID
+
 # カスタムキャッシュディレクトリを指定
 custom_cache_dir = "models/"
 
@@ -29,7 +37,7 @@ device = "cpu"
 whisper_model = WhisperModel("turbo", download_root=custom_cache_dir)
 # asteroid_model = BaseModel.from_pretrained("mpariente/DPRNNTasNet-ks2_WHAM_sepclean", device=device, cache_dir=custom_cache_dir)
 
-aivmx_path = Path("models/Anneli.aivmx")
+aivmx_path = Path(AIVMX_PATH)
 
 onnx_providers = [("CPUExecutionProvider", {
     "arena_extend_strategy": "kSameAsRequested",
@@ -44,11 +52,6 @@ SILENCE_DURATION = 2.0  # 無音とみなす継続時間（秒）
 TARGET_VOLUME = 0.1  # 正規化後のターゲットボリューム（RMS値）
 # 最大音量閾値を設定（例: RMS値が0.5以上の場合、無視する）
 MAX_VOLUME_THRESHOLD = 0.5
-
-#デバイスID
-MIC_DEVICE = 11 # <- ここにマイクのデバイスID
-MONITOR_DEVICE = 13 # <-ここにモニター出力のデバイスID
-SPEEKER_DEVICE = 14 # <-ここにスピーカー出力のデバイスID
 
 # 信頼スコアのしきい値
 AVG_LOGPROB_THRESHOLD = -1.0
